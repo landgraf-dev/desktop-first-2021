@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{4FD88CF0-8CF6-400D-81EF-47A41F524CC1}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="server\XDataServer.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="client\XDataClient.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="XDataServer">
+        <MSBuild Projects="server\XDataServer.dproj"/>
+    </Target>
+    <Target Name="XDataServer:Clean">
+        <MSBuild Projects="server\XDataServer.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="XDataServer:Make">
+        <MSBuild Projects="server\XDataServer.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="XDataClient">
+        <MSBuild Projects="client\XDataClient.dproj"/>
+    </Target>
+    <Target Name="XDataClient:Clean">
+        <MSBuild Projects="client\XDataClient.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="XDataClient:Make">
+        <MSBuild Projects="client\XDataClient.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="XDataServer;XDataClient"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="XDataServer:Clean;XDataClient:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="XDataServer:Make;XDataClient:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
